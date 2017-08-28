@@ -12,9 +12,12 @@
 		0D8F8CB31F54730F007AE69F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D8F8CB11F54730F007AE69F /* Main.storyboard */; };
 		0D8F8CB51F54730F007AE69F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D8F8CB41F54730F007AE69F /* Assets.xcassets */; };
 		0D8F8CB81F54730F007AE69F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D8F8CB61F54730F007AE69F /* LaunchScreen.storyboard */; };
+		0D8F8CC01F5475F0007AE69F /* GoogleClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */; };
+		901196A08CFD9A6D5FA34FF9 /* Pods_GoogleStockAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3CF05DC6D9E1C1DE7860AC /* Pods_GoogleStockAPI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A3CF05DC6D9E1C1DE7860AC /* Pods_GoogleStockAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleStockAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D8F8CAA1F54730F007AE69F /* GoogleStockAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleStockAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D8F8CAF1F54730F007AE69F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +25,9 @@
 		0D8F8CB41F54730F007AE69F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D8F8CB71F54730F007AE69F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D8F8CB91F54730F007AE69F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleClient.swift; sourceTree = "<group>"; };
+		82F9E46FB7CDFE2C837F436C /* Pods-GoogleStockAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleStockAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleStockAPI/Pods-GoogleStockAPI.debug.xcconfig"; sourceTree = "<group>"; };
+		CF528BB981941475431C9333 /* Pods-GoogleStockAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleStockAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleStockAPI/Pods-GoogleStockAPI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				901196A08CFD9A6D5FA34FF9 /* Pods_GoogleStockAPI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +47,8 @@
 			children = (
 				0D8F8CAC1F54730F007AE69F /* GoogleStockAPI */,
 				0D8F8CAB1F54730F007AE69F /* Products */,
+				91CD87D6035CC395E8AF1B6B /* Pods */,
+				CE2B5F198331611D936C4247 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +63,32 @@
 		0D8F8CAC1F54730F007AE69F /* GoogleStockAPI */ = {
 			isa = PBXGroup;
 			children = (
-				0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */,
 				0D8F8CAF1F54730F007AE69F /* ViewController.swift */,
+				0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */,
 				0D8F8CB11F54730F007AE69F /* Main.storyboard */,
 				0D8F8CB41F54730F007AE69F /* Assets.xcassets */,
 				0D8F8CB61F54730F007AE69F /* LaunchScreen.storyboard */,
 				0D8F8CB91F54730F007AE69F /* Info.plist */,
+				0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */,
 			);
 			path = GoogleStockAPI;
+			sourceTree = "<group>";
+		};
+		91CD87D6035CC395E8AF1B6B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				82F9E46FB7CDFE2C837F436C /* Pods-GoogleStockAPI.debug.xcconfig */,
+				CF528BB981941475431C9333 /* Pods-GoogleStockAPI.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CE2B5F198331611D936C4247 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0A3CF05DC6D9E1C1DE7860AC /* Pods_GoogleStockAPI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0D8F8CBC1F54730F007AE69F /* Build configuration list for PBXNativeTarget "GoogleStockAPI" */;
 			buildPhases = (
+				5A60962602F9B2A4F1121D06 /* [CP] Check Pods Manifest.lock */,
 				0D8F8CA61F54730F007AE69F /* Sources */,
 				0D8F8CA71F54730F007AE69F /* Frameworks */,
 				0D8F8CA81F54730F007AE69F /* Resources */,
+				7A103E3C35B75936BD66D97E /* [CP] Embed Pods Frameworks */,
+				E272F6C2D8AEC7D1AB971DFB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,12 +162,61 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5A60962602F9B2A4F1121D06 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7A103E3C35B75936BD66D97E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoogleStockAPI/Pods-GoogleStockAPI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E272F6C2D8AEC7D1AB971DFB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GoogleStockAPI/Pods-GoogleStockAPI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0D8F8CA61F54730F007AE69F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0D8F8CB01F54730F007AE69F /* ViewController.swift in Sources */,
+				0D8F8CC01F5475F0007AE69F /* GoogleClient.swift in Sources */,
 				0D8F8CAE1F54730F007AE69F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +338,7 @@
 		};
 		0D8F8CBD1F54730F007AE69F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82F9E46FB7CDFE2C837F436C /* Pods-GoogleStockAPI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 22U4CL887R;
@@ -272,6 +352,7 @@
 		};
 		0D8F8CBE1F54730F007AE69F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF528BB981941475431C9333 /* Pods-GoogleStockAPI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 22U4CL887R;
@@ -302,6 +383,7 @@
 				0D8F8CBE1F54730F007AE69F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

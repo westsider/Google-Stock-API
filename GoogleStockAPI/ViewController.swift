@@ -9,10 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let marketData = MarketData()
+    let urlRequest = "https://finance.google.com/finance/info?client=ig&q=NASDAQ%3AAAPL"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        marketData.getStockData(urlAddress: urlRequest)
     }
 
     /*
@@ -26,3 +30,29 @@ class ViewController: UIViewController {
 
 }
 
+class Starship {
+    
+    var prefix: String?
+    
+    var name: String
+    
+    init(name: String, prefix: String? = nil)
+    {
+        self.name = name
+        self.prefix = prefix
+    }
+    
+    var fullName: String {
+        return (prefix != nil ? prefix! + " " : "") + name
+    }
+    
+    func identify() {
+        print(fullName)
+    }
+}
+
+var ncc1701 = Starship(name: "Enterprise", prefix: "USS")
+
+let fullname =  ncc1701.fullName //"USS Enterprise"
+
+let id = ncc1701.identify

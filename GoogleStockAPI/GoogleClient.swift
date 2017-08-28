@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 /*
  Stock API Details
@@ -17,51 +18,30 @@ import Alamofire
  http://finance.google.com/finance/info?client=ig&q=NASDAQ%3AAAPL,GOOG
  */
 
-class Starship {
+class MarketData {
     
-    /*
-     
-     Github set up
-     1. Create repository with space in name,  NO README, copy link
-     2. Config, remotes. +, add remote no spaces in name, commit, push
-     
-     Add images to git readme
-     Issues > new issue > drop in an image > copy the link > paste into my readme
-     
-     Github Markup  for commits
-     type: subject
-     body
-     Footer
-     
-     feat: a new feature
-     fix: a bug fix
-     docs: changes to documentation
-     style: formatting, missing semi colons, etc; no code change
-     refactor: refactoring production code
-     test: adding tests, refactoring test; no production code change
-     chore: updating build tasks, package manager configs, etc; no production code change    */
-    
-    var prefix: String?
-    
-    var name: String
-    
-    init(name: String, prefix: String? = nil)
-    {
-        self.name = name
-        self.prefix = prefix
+    func getStockData(urlAddress: String) {
+        Alamofire.request(urlAddress).responseString{ response in
+
+            switch response.result {
+                case .success(var value):
+                    value.remove(at: value.startIndex); value.remove(at: value.startIndex); value.remove(at: value.startIndex)
+                
+                    if let dataFromString = value.data(using: .utf8, allowLossyConversion: false) {
+                            let json = JSON(data: dataFromString)
+                        print("json \(json)")
+                        let ticker = json[0]["t"]
+                        let last = json[0]["l"]
+                        let time = json[0]["ltt"]
+                        print("\(time) \(ticker) \(last)")
+                    }
+
+                case .failure(let error):
+                    print(error)
+            }
+        }
     }
     
-    var fullName: String {
-        return (prefix != nil ? prefix! + " " : "") + name
-    }
-    
-    func identify() {
-        print(fullName)
-    }
+
 }
 
-var ncc1701 = Starship(name: "Enterprise", prefix: "USS")
-
-let fullname =  ncc1701.fullName //"USS Enterprise"
-
-let id = ncc1701.identify()

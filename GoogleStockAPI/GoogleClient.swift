@@ -24,11 +24,11 @@ class MarketData {
                 
                     if let dataFromString = value.data(using: .utf8, allowLossyConversion: false) {
                         let json = JSON(data: dataFromString)
-                        print("json \(json)")
+                        //print("json \(json)")
                         let ticker = json[0]["t"]
                         let last = json[0]["l"]
                         let time = json[0]["ltt"]
-                        print("\(time) \(ticker) \(last)")
+                        //print("\(time) \(ticker) \(last)")
                     }
 
                 case .failure(let error):

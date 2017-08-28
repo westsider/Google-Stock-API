@@ -13,6 +13,7 @@
 		0D8F8CB51F54730F007AE69F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D8F8CB41F54730F007AE69F /* Assets.xcassets */; };
 		0D8F8CB81F54730F007AE69F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D8F8CB61F54730F007AE69F /* LaunchScreen.storyboard */; };
 		0D8F8CC01F5475F0007AE69F /* GoogleClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */; };
+		0D999E261F54BAF000EFB47F /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D999E251F54BAF000EFB47F /* StockTableViewCell.swift */; };
 		901196A08CFD9A6D5FA34FF9 /* Pods_GoogleStockAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A3CF05DC6D9E1C1DE7860AC /* Pods_GoogleStockAPI.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		0D8F8CB71F54730F007AE69F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D8F8CB91F54730F007AE69F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleClient.swift; sourceTree = "<group>"; };
+		0D999E251F54BAF000EFB47F /* StockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		82F9E46FB7CDFE2C837F436C /* Pods-GoogleStockAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleStockAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleStockAPI/Pods-GoogleStockAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		CF528BB981941475431C9333 /* Pods-GoogleStockAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleStockAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleStockAPI/Pods-GoogleStockAPI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,9 +65,10 @@
 		0D8F8CAC1F54730F007AE69F /* GoogleStockAPI */ = {
 			isa = PBXGroup;
 			children = (
+				0D8F8CB11F54730F007AE69F /* Main.storyboard */,
+				0D999E251F54BAF000EFB47F /* StockTableViewCell.swift */,
 				0D8F8CAF1F54730F007AE69F /* ViewController.swift */,
 				0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */,
-				0D8F8CB11F54730F007AE69F /* Main.storyboard */,
 				0D8F8CB41F54730F007AE69F /* Assets.xcassets */,
 				0D8F8CB61F54730F007AE69F /* LaunchScreen.storyboard */,
 				0D8F8CB91F54730F007AE69F /* Info.plist */,
@@ -217,6 +220,7 @@
 			files = (
 				0D8F8CB01F54730F007AE69F /* ViewController.swift in Sources */,
 				0D8F8CC01F5475F0007AE69F /* GoogleClient.swift in Sources */,
+				0D999E261F54BAF000EFB47F /* StockTableViewCell.swift in Sources */,
 				0D8F8CAE1F54730F007AE69F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

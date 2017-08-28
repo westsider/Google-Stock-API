@@ -15,8 +15,9 @@
 //  make url request
 //  add symbol input
 //  find cool ui
+//  create ui to show results on tableview
 
-//  create ui to enter ticker, show results on tableview,  ask for update
+//  create ui to enter ticker, ask for update
 //  persist in realm
 
 
@@ -30,7 +31,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var tableview: UITableView!
     
-   // let search = UISearchBar() // Create your search bar
+    let titleArray = ["AAPL", "GOOG", "MSFT", "SPY"]
+    let priceArray = ["151.90", "861.20", "45.01", "240.01"]
+    
+    // let search = UISearchBar() // Create your search bar
     //controller.navigationController.navigationItem.titleView = search
 
     override func viewDidLoad() {
@@ -39,32 +43,20 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         marketData.getStockData(ticker: "AAPL")
     }
     
-
-    /* Create a tableview
-    
-    drag tableview to VC add constraints
-    +1 prototype cell
-    Control Click on TableViewCell and set identifier to Cell
-    create outlet  @IBOutlet weak var tableView: UITableView!
-     
-    Control Click drag to center = datasource + delegate OR
-    tableview.delegate = self
-    tableview.datasource = self
-     
-    REQUIRED DELEGATES = UITableViewDataSource, UITableViewDelegate
-    */
-    
-    let titleArray = ["AAPL", "GOOG", "MSFT", "SPY"]
-    
+   
+    //MARK: - Tableview
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titleArray.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "Cell")
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as!StockTableViewCell
         
-        cell.textLabel?.text = titleArray[indexPath.row]
+        cell.tickerLabel?.text = titleArray[indexPath.row]
         
+        cell.priceLabel?.text = priceArray[indexPath.row]
+
         return cell
     }
 

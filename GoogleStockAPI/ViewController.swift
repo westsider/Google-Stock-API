@@ -34,15 +34,36 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let titleArray = ["AAPL", "GOOG", "MSFT", "SPY"]
     let priceArray = ["151.90", "861.20", "45.01", "240.01"]
     
-    // let search = UISearchBar() // Create your search bar
-    //controller.navigationController.navigationItem.titleView = search
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        marketData.getStockData(ticker: "AAPL")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
+        
+        
+        //marketData.getStockData(ticker: "AAPL")
     }
     
+    func addTapped() {
+        
+        print("tapped add")
+        
+        let alertController = UIAlertController(title: "Search", message: "Enter a ticker symbol", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
+        { (result : UIAlertAction) -> Void in
+            print("Cancel")
+        }
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+            print("OK")
+            self.marketData.getStockData(ticker: "AAPL")
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
    
     //MARK: - Tableview
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

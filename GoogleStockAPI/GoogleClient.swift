@@ -28,7 +28,7 @@ class MarketData {
                         let ticker = json[0]["t"]
                         let last = json[0]["l"]
                         let time = json[0]["ltt"]
-                        //print("\(time) \(ticker) \(last)")
+                        print("\(time) \(ticker) \(last)")
                     }
 
                 case .failure(let error):

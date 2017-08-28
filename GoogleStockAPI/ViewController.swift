@@ -16,9 +16,11 @@
 //  add symbol input
 //  find cool ui
 //  create ui to show results on tableview
+//  create ui to enter ticker
 
-//  create ui to enter ticker, ask for update
 //  persist in realm
+//  load tableview from realm
+//  update with button and every 60 mins
 
 
 
@@ -33,36 +35,35 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     let titleArray = ["AAPL", "GOOG", "MSFT", "SPY"]
     let priceArray = ["151.90", "861.20", "45.01", "240.01"]
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
-        
-        
-        //marketData.getStockData(ticker: "AAPL")
+
     }
     
+    //TODO: - Subclass inside Google Client
     func addTapped() {
         
         print("tapped add")
-        
-        let alertController = UIAlertController(title: "Search", message: "Enter a ticker symbol", preferredStyle: UIAlertControllerStyle.alert)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel)
-        { (result : UIAlertAction) -> Void in
-            print("Cancel")
+        let alert = UIAlertController(title: "Search", message: "Please enter a ticker", preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: "Done", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            guard let firstName = textField.text, firstName != "" else {
+                print("ticker is empty")
+                //TODO: - alert textfield empty
+                return
+            }
+            print("Entered: \(String(describing: firstName))")
+            self.marketData.getStockData(ticker: textField.text!)
         }
-        
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-            print("OK")
-            self.marketData.getStockData(ticker: "AAPL")
+        alert.addTextField { (textField) in
+            textField.placeholder = "AAPL"
         }
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+        alert.addAction(action)
+        self.present(alert, animated:true, completion: nil)
+        
     }
    
     //MARK: - Tableview

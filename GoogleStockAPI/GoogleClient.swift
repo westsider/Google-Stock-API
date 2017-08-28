@@ -10,17 +10,12 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-/*
- Stock API Details
- This is a REST based API. Here is the basic syntax:
- http://finance.google.com/finance/info?client=ig&q=NASDAQ%3A[STOCK TICKERS]
- An example of this:
- http://finance.google.com/finance/info?client=ig&q=NASDAQ%3AAAPL,GOOG
- */
-
 class MarketData {
     
-    func getStockData(urlAddress: String) {
+    func getStockData(ticker: String) {
+        
+        let urlAddress = "https://finance.google.com/finance/info?client=ig&q=NASDAQ%3A\(ticker)"
+        
         Alamofire.request(urlAddress).responseString{ response in
 
             switch response.result {
@@ -28,7 +23,7 @@ class MarketData {
                     value.remove(at: value.startIndex); value.remove(at: value.startIndex); value.remove(at: value.startIndex)
                 
                     if let dataFromString = value.data(using: .utf8, allowLossyConversion: false) {
-                            let json = JSON(data: dataFromString)
+                        let json = JSON(data: dataFromString)
                         print("json \(json)")
                         let ticker = json[0]["t"]
                         let last = json[0]["l"]

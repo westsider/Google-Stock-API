@@ -17,10 +17,11 @@
 //  find cool ui
 //  create ui to show results on tableview
 //  create ui to enter ticker
-
 //  having trouble writing and reading to realm, a lillte rusty - playground
 //  persist in realm
 //  load tableview from realm
+
+//  delete rows intableview
 //  update with button and every 60 mins
 
 
@@ -69,8 +70,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 return
             }
             print("Entered: \(String(describing: firstName))")
-            self.marketData.getStockData(ticker: textField.text!)
-            
+            print("work not done")
+            self.marketData.getStockData(ticker: firstName) { ( doneWork ) in
+                if doneWork {
+                    print("work done")
+                    self.tableview.reloadData()
+                }
+            }
         }
         alert.addTextField { (textField) in
             textField.placeholder = "AAPL"

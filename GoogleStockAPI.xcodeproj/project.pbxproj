@@ -19,7 +19,6 @@
 
 /* Begin PBXFileReference section */
 		0A3CF05DC6D9E1C1DE7860AC /* Pods_GoogleStockAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleStockAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0D3148871F55DF58009055FD /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		0D8F8CAA1F54730F007AE69F /* GoogleStockAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleStockAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D8F8CAF1F54730F007AE69F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -74,7 +73,6 @@
 				0D8F8CB61F54730F007AE69F /* LaunchScreen.storyboard */,
 				0D8F8CB91F54730F007AE69F /* Info.plist */,
 				0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */,
-				0D3148871F55DF58009055FD /* MyPlayground.playground */,
 			);
 			path = GoogleStockAPI;
 			sourceTree = "<group>";

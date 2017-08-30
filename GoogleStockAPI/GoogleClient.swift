@@ -22,7 +22,9 @@ class Prices: Object {
 
 class MarketData {
 
-    func getStockData(ticker: String) {
+    func getStockData(ticker: String,enterDoStuff: @escaping (Bool) -> Void) {
+        
+        enterDoStuff(false)
         
         let urlAddress = "https://finance.google.com/finance/info?client=ig&q=NASDAQ%3A\(ticker)"
         
@@ -47,27 +49,23 @@ class MarketData {
                         prices.last = "\(last)"
                         prices.time = "\(time)"
                         
+                        print("Begin Realm Save")
+                        
                         try! realm.write({ // [2]
                             realm.add(prices)
+                            
                             //self.tableview.insertRows(at: [IndexPath.init(row: self.todoList.count-1, section: 0)], with: .automatic)
                         })
                         
                         print("\(prices.time) \(prices.ticker) \(prices.last)")
+                        enterDoStuff(true)
+                        print("Finished Realm Save")
                     }
 
                 case .failure(let error):
                     print(error)
             }
         }
-    }
-}
-
-final class PricesList: Object {
-    
-    dynamic var id = NSUUID().uuidString
-    let items = List<Prices>()
-    
-    override static func primaryKey() -> String? {
-        return "id"
+        
     }
 }

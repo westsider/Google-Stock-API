@@ -28,6 +28,7 @@
 
 import UIKit
 import RealmSwift
+import Realm
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -43,11 +44,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    var notificationToken: NotificationToken!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableview.reloadData()
     }
     
     //TODO: - Subclass inside Google Client
@@ -59,11 +66,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let textField = alert.textFields![0] as UITextField
             guard let firstName = textField.text, firstName != "" else {
                 print("ticker is empty")
-                //TODO: - alert textfield empty
                 return
             }
             print("Entered: \(String(describing: firstName))")
             self.marketData.getStockData(ticker: textField.text!)
+            
         }
         alert.addTextField { (textField) in
             textField.placeholder = "AAPL"

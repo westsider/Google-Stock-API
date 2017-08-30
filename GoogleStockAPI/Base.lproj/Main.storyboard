@@ -23,14 +23,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tEC-Rb-KAU">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="HaF-i0-O1g" customClass="StockTableViewCell" customModule="GoogleStockAPI" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HaF-i0-O1g" id="zM4-4z-3H6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AAPL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Su0-EH-UkA">
@@ -99,6 +99,38 @@
             </objects>
             <point key="canvasLocation" x="1056.8" y="123.68815592203899"/>
         </scene>
+        <!--Chart View Controller-->
+        <scene sceneID="5aH-z4-9GC">
+            <objects>
+                <viewController storyboardIdentifier="ChartsVC" id="5mE-Xo-9Kw" customClass="ChartViewController" customModule="GoogleStockAPI" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="P4B-TA-cyg"/>
+                        <viewControllerLayoutGuide type="bottom" id="66o-CU-uI5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FSk-xd-0jf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chartVert" translatesAutoresizingMaskIntoConstraints="NO" id="cCm-Ry-mzl">
+                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cCm-Ry-mzl" firstAttribute="top" secondItem="P4B-TA-cyg" secondAttribute="bottom" constant="8" id="Fpk-pJ-yGk"/>
+                            <constraint firstItem="cCm-Ry-mzl" firstAttribute="leading" secondItem="FSk-xd-0jf" secondAttribute="leading" id="J99-Au-WBs"/>
+                            <constraint firstItem="66o-CU-uI5" firstAttribute="top" secondItem="cCm-Ry-mzl" secondAttribute="bottom" id="O80-Oh-B1D"/>
+                            <constraint firstAttribute="trailing" secondItem="cCm-Ry-mzl" secondAttribute="trailing" id="kX4-Lh-2rh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueToChart" id="XPI-Ux-eoI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S91-Rc-skm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1816.8" y="120.98950524737631"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="JMS-WV-hRe">
             <objects>
@@ -119,6 +151,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chartVert" width="253" height="450"/>
         <image name="miniChart" width="382" height="85"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="XPI-Ux-eoI"/>
+    </inferredMetricsTieBreakers>
 </document>

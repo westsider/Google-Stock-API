@@ -17,14 +17,13 @@
 //  find cool ui
 //  create ui to show results on tableview
 //  create ui to enter ticker
-//  having trouble writing and reading to realm, a lillte rusty - playground
 //  persist in realm
 //  load tableview from realm
 //  delete rows in tableview
+//  didselectrow opens new VC
 
+//  add chart to new VC
 //  update with button and every 60 mins
-
-
 
 
 import UIKit
@@ -44,7 +43,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return realm.objects(Prices.self)
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -111,6 +110,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             tableView.deleteRows(at:[indexPath], with: .automatic)
             
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let myVC = storyboard?.instantiateViewController(withIdentifier: "ChartsVC") as! ChartViewController
+    
+        navigationController?.pushViewController(myVC, animated: true)
     }
 }
 

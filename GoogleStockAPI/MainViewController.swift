@@ -20,8 +20,8 @@
 //  having trouble writing and reading to realm, a lillte rusty - playground
 //  persist in realm
 //  load tableview from realm
+//  delete rows in tableview
 
-//  delete rows intableview
 //  update with button and every 60 mins
 
 
@@ -44,8 +44,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return realm.objects(Prices.self)
         }
     }
-    
-    var notificationToken: NotificationToken!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,22 +86,32 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
    
     //MARK: - Tableview
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return titleArray.count
         return priceList.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as!StockTableViewCell
-        
-        //cell.tickerLabel?.text = titleArray[indexPath.row]
         cell.tickerLabel?.text = priceList[indexPath.row].ticker
-        //cell.priceLabel?.text = priceArray[indexPath.row]
         cell.priceLabel?.text = priceList[indexPath.row].last
         return cell
     }
-
- 
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if (editingStyle == .delete){
+            let item = priceList[indexPath.row]
+            try! self.realm.write({
+                self.realm.delete(item)
+            })
+            
+            tableView.deleteRows(at:[indexPath], with: .automatic)
+            
+        }
+    }
 }
 
 

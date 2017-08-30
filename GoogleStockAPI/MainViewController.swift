@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  GoogleStockAPI
 //
 //  Created by Warren Hansen on 8/28/17.
@@ -18,6 +18,7 @@
 //  create ui to show results on tableview
 //  create ui to enter ticker
 
+//  having trouble writing and reading to realm, a lillte rusty - playground
 //  persist in realm
 //  load tableview from realm
 //  update with button and every 60 mins
@@ -26,16 +27,22 @@
 
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let marketData = MarketData()
     
     @IBOutlet weak var tableview: UITableView!
-    
-    let titleArray = ["AAPL", "GOOG", "MSFT", "SPY"]
-    let priceArray = ["151.90", "861.20", "45.01", "240.01"]
 
+    let realm = try! Realm()
+
+    var priceList: Results<Prices> {
+        get {
+            return realm.objects(Prices.self)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,17 +75,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
    
     //MARK: - Tableview
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titleArray.count
+        //return titleArray.count
+        return priceList.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as!StockTableViewCell
         
-        cell.tickerLabel?.text = titleArray[indexPath.row]
-        
-        cell.priceLabel?.text = priceArray[indexPath.row]
-
+        //cell.tickerLabel?.text = titleArray[indexPath.row]
+        cell.tickerLabel?.text = priceList[indexPath.row].ticker
+        //cell.priceLabel?.text = priceArray[indexPath.row]
+        cell.priceLabel?.text = priceList[indexPath.row].last
         return cell
     }
 

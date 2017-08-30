@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D8F8CAE1F54730F007AE69F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */; };
-		0D8F8CB01F54730F007AE69F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F8CAF1F54730F007AE69F /* ViewController.swift */; };
+		0D8F8CB01F54730F007AE69F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F8CAF1F54730F007AE69F /* MainViewController.swift */; };
 		0D8F8CB31F54730F007AE69F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D8F8CB11F54730F007AE69F /* Main.storyboard */; };
 		0D8F8CB51F54730F007AE69F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D8F8CB41F54730F007AE69F /* Assets.xcassets */; };
 		0D8F8CB81F54730F007AE69F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D8F8CB61F54730F007AE69F /* LaunchScreen.storyboard */; };
@@ -19,9 +19,10 @@
 
 /* Begin PBXFileReference section */
 		0A3CF05DC6D9E1C1DE7860AC /* Pods_GoogleStockAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleStockAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D3148871F55DF58009055FD /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		0D8F8CAA1F54730F007AE69F /* GoogleStockAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleStockAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0D8F8CAF1F54730F007AE69F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0D8F8CAF1F54730F007AE69F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		0D8F8CB21F54730F007AE69F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D8F8CB41F54730F007AE69F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D8F8CB71F54730F007AE69F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,13 +67,14 @@
 			isa = PBXGroup;
 			children = (
 				0D8F8CB11F54730F007AE69F /* Main.storyboard */,
-				0D999E251F54BAF000EFB47F /* StockTableViewCell.swift */,
-				0D8F8CAF1F54730F007AE69F /* ViewController.swift */,
+				0D8F8CAF1F54730F007AE69F /* MainViewController.swift */,
 				0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */,
+				0D999E251F54BAF000EFB47F /* StockTableViewCell.swift */,
 				0D8F8CB41F54730F007AE69F /* Assets.xcassets */,
 				0D8F8CB61F54730F007AE69F /* LaunchScreen.storyboard */,
 				0D8F8CB91F54730F007AE69F /* Info.plist */,
 				0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */,
+				0D3148871F55DF58009055FD /* MyPlayground.playground */,
 			);
 			path = GoogleStockAPI;
 			sourceTree = "<group>";
@@ -218,7 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D8F8CB01F54730F007AE69F /* ViewController.swift in Sources */,
+				0D8F8CB01F54730F007AE69F /* MainViewController.swift in Sources */,
 				0D8F8CC01F5475F0007AE69F /* GoogleClient.swift in Sources */,
 				0D999E261F54BAF000EFB47F /* StockTableViewCell.swift in Sources */,
 				0D8F8CAE1F54730F007AE69F /* AppDelegate.swift in Sources */,

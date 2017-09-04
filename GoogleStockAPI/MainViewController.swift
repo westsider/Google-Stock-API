@@ -22,8 +22,11 @@
 //  delete rows in tableview
 //  didselectrow opens new VC
 
+//  just got access to tradeit api -  no price series func or structure seen
+
 //  add chart to new VC
 //  update with button and every 60 mins
+//  search NASDAQ and NYSE
 
 
 import UIKit

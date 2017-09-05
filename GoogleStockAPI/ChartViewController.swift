@@ -28,11 +28,8 @@ class ChartViewController: UIViewController {
      
         self.dataFeed.historical(ticker: ticker, start: startDate, end: endDate ) { ( doneWork ) in
             if doneWork {
-                print("work done")
                 for thing in self.dataFeed.priceHistory {
-                        print(thing.ticker!)
-                        print(thing.date!)
-                        print(thing.close!)
+                    print(thing.ticker! + " " + thing.date! +  " \(thing.close!)")
                 }
                 
             }

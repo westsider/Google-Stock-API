@@ -8,13 +8,12 @@
 //  create a data structure
 //  download 1 year of daily data
 //  save it to object
-
 //  use completion handler to get the price history before creating chart
+
 //  use it in simple line chart
 //  convert to make an OHLC
 
 import UIKit
-//import Alamofire
 
 class ChartViewController: UIViewController {
     
@@ -27,7 +26,17 @@ class ChartViewController: UIViewController {
         let startDate = "2017-08-01"
         let endDate = "2017-08-30"
      
-        self.dataFeed.historical(ticker: ticker, start: startDate, end: endDate )
+        self.dataFeed.historical(ticker: ticker, start: startDate, end: endDate ) { ( doneWork ) in
+            if doneWork {
+                print("work done")
+                for thing in self.dataFeed.priceHistory {
+                        print(thing.ticker!)
+                        print(thing.date!)
+                        print(thing.close!)
+                }
+                
+            }
+        }
     }
 }
 

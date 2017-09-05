@@ -53,8 +53,6 @@ class MarketData {
                         
                         try! realm.write({ // [2]
                             realm.add(prices)
-                            
-                            //self.tableview.insertRows(at: [IndexPath.init(row: self.todoList.count-1, section: 0)], with: .automatic)
                         })
                         
                         print("\(prices.time) \(prices.ticker) \(prices.last)")

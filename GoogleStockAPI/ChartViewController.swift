@@ -11,7 +11,8 @@
 //  use completion handler to get the price history before creating chart
 //  use stock data in simple line chart
 
-//  add date as string
+//  task: scichart demo
+//  add date from string
 //  reverse the days
 //  take ticker from main vc
 //  convert to make an OHLC
@@ -39,19 +40,26 @@ class ChartViewController: UIViewController {
                 for thing in self.dataFeed.priceHistory {
                     print(thing.ticker! + " " + thing.date! +  " \(thing.close!)")
                 }
-                self.updateGraph()
+                //self.updateGraphCharts()
             }
         }
     }
     
-    func updateGraph() {
+    func updateGraphCharts() {
         
         var lineChartEntry = [ChartDataEntry]()
         
         for i in 0..<self.dataFeed.priceHistory.count {
+          //  print(self.dataFeed.priceHistory[i].date!)
             
-            //convert this to date I can use a string?
-            print(self.dataFeed.priceHistory[i].date!)
+            var latitude: String? = ""
+            
+            latitude = self.dataFeed.priceHistory[i].date!
+            
+            if let lat = latitude, let doubleLat = Double(lat) {
+                print("changed to double: \(doubleLat)")  // doubleLat is of type Double now
+            }
+            
             
             let value = ChartDataEntry(x: Double(i), y: self.dataFeed.priceHistory[i].close! )
             lineChartEntry.append(value)

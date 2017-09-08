@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import Realm
-import RealmSwift
+//import Realm
+//import RealmSwift
 
 class PriceHistory {
     

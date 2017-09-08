@@ -110,22 +110,9 @@
                     <view key="view" contentMode="scaleToFill" id="FSk-xd-0jf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6CC-cj-eeD" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="0.0" y="28" width="375" height="639"/>
-                                <color key="backgroundColor" red="0.52154112490000004" green="0.65439286890000004" blue="0.97105586529999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="6CC-cj-eeD" secondAttribute="trailing" id="XP4-j6-hP1"/>
-                            <constraint firstItem="6CC-cj-eeD" firstAttribute="bottom" secondItem="66o-CU-uI5" secondAttribute="top" id="eTY-2V-Zwn"/>
-                            <constraint firstItem="6CC-cj-eeD" firstAttribute="top" secondItem="P4B-TA-cyg" secondAttribute="bottom" constant="8" symbolic="YES" id="jop-sL-LiU"/>
-                            <constraint firstItem="6CC-cj-eeD" firstAttribute="leading" secondItem="FSk-xd-0jf" secondAttribute="leading" id="la9-kI-Gfp"/>
-                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="chtChart" destination="6CC-cj-eeD" id="nHs-Pb-JxJ"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="segueToChart" id="XPI-Ux-eoI"/>
                     </connections>
                 </viewController>

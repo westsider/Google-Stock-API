@@ -18,7 +18,7 @@
 //  convert to make an OHLC
 
 import UIKit
-import Charts
+//import Charts
 
 class ChartViewController: UIViewController {
     
@@ -26,7 +26,7 @@ class ChartViewController: UIViewController {
     
     var numbers:[Double] = []
     
-    @IBOutlet weak var chtChart: LineChartView!
+  //  @IBOutlet weak var chtChart: LineChartView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,38 +45,38 @@ class ChartViewController: UIViewController {
         }
     }
     
-    func updateGraphCharts() {
-        
-        var lineChartEntry = [ChartDataEntry]()
-        
-        for i in 0..<self.dataFeed.priceHistory.count {
-          //  print(self.dataFeed.priceHistory[i].date!)
-            
-            var latitude: String? = ""
-            
-            latitude = self.dataFeed.priceHistory[i].date!
-            
-            if let lat = latitude, let doubleLat = Double(lat) {
-                print("changed to double: \(doubleLat)")  // doubleLat is of type Double now
-            }
-            
-            
-            let value = ChartDataEntry(x: Double(i), y: self.dataFeed.priceHistory[i].close! )
-            lineChartEntry.append(value)
-        }
-        
-        let line1 = LineChartDataSet(values: lineChartEntry, label: "Number")
-        
-        line1.colors = [NSUIColor.blue]
-        
-        let data = LineChartData()
-        
-        data.addDataSet(line1)
-
-        chtChart.data = data
-        
-        chtChart.chartDescription?.text = "My awesome chart"
-    }
+//    func updateGraphCharts() {
+//        
+//        var lineChartEntry = [ChartDataEntry]()
+//        
+//        for i in 0..<self.dataFeed.priceHistory.count {
+//          //  print(self.dataFeed.priceHistory[i].date!)
+//            
+//            var latitude: String? = ""
+//            
+//            latitude = self.dataFeed.priceHistory[i].date!
+//            
+//            if let lat = latitude, let doubleLat = Double(lat) {
+//                print("changed to double: \(doubleLat)")  // doubleLat is of type Double now
+//            }
+//            
+//            
+//            let value = ChartDataEntry(x: Double(i), y: self.dataFeed.priceHistory[i].close! )
+//            lineChartEntry.append(value)
+//        }
+//        
+//        let line1 = LineChartDataSet(values: lineChartEntry, label: "Number")
+//        
+//        line1.colors = [NSUIColor.blue]
+//        
+//        let data = LineChartData()
+//        
+//        data.addDataSet(line1)
+//
+//        chtChart.data = data
+//        
+//        chtChart.chartDescription?.text = "My awesome chart"
+//    }
 }
 
 

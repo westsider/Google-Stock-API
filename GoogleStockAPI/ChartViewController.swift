@@ -11,22 +11,19 @@
 //  use completion handler to get the price history before creating chart
 //  use stock data in simple line chart
 
-//  task: scichart demo
 //  add date from string
 //  reverse the days
 //  take ticker from main vc
 //  convert to make an OHLC
 
 import UIKit
-//import Charts
+import SciChart
 
 class ChartViewController: UIViewController {
     
     let dataFeed = DataFeed()
     
-    var numbers:[Double] = []
-    
-  //  @IBOutlet weak var chtChart: LineChartView!
+    var sciChartSurface: SCIChartSurface?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,42 +38,23 @@ class ChartViewController: UIViewController {
                     print(thing.ticker! + " " + thing.date! +  " \(thing.close!)")
                 }
                 //self.updateGraphCharts()
+                self.setUpChartUI()
             }
         }
     }
     
-//    func updateGraphCharts() {
-//        
-//        var lineChartEntry = [ChartDataEntry]()
-//        
-//        for i in 0..<self.dataFeed.priceHistory.count {
-//          //  print(self.dataFeed.priceHistory[i].date!)
-//            
-//            var latitude: String? = ""
-//            
-//            latitude = self.dataFeed.priceHistory[i].date!
-//            
-//            if let lat = latitude, let doubleLat = Double(lat) {
-//                print("changed to double: \(doubleLat)")  // doubleLat is of type Double now
-//            }
-//            
-//            
-//            let value = ChartDataEntry(x: Double(i), y: self.dataFeed.priceHistory[i].close! )
-//            lineChartEntry.append(value)
-//        }
-//        
-//        let line1 = LineChartDataSet(values: lineChartEntry, label: "Number")
-//        
-//        line1.colors = [NSUIColor.blue]
-//        
-//        let data = LineChartData()
-//        
-//        data.addDataSet(line1)
-//
-//        chtChart.data = data
-//        
-//        chtChart.chartDescription?.text = "My awesome chart"
-//    }
+    func setUpChartUI() {
+        
+        sciChartSurface = SCIChartSurface(frame: self.view.bounds)
+        sciChartSurface?.translatesAutoresizingMaskIntoConstraints = true
+        self.view.addSubview(sciChartSurface!)
+        
+        // create axis
+        sciChartSurface?.xAxes.add(SCINumericAxis())
+        sciChartSurface?.yAxes.add(SCINumericAxis())
+        
+    }
+
 }
 
 

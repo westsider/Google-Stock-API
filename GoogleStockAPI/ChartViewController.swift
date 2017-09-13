@@ -16,8 +16,11 @@
 //  take ticker from main vc
 //  convert to make an OHLC
 
+
+
 import UIKit
 import SciChart
+import Accelerate
 
 class ChartViewController: UIViewController {
     
@@ -26,70 +29,80 @@ class ChartViewController: UIViewController {
     var sciChartSurface: SCIChartSurface?
     
     var lineDataSeries: SCIXyDataSeries!
-    var scatterDataSeries: SCIXyDataSeries!
     
     var lineRenderableSeries: SCIFastLineRenderableSeries!
-    var scatterRenderableSeries: SCIXyScatterRenderableSeries!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpUI()
+        
         let ticker = "$SPX"
         let startDate = "2017-08-01"
-        let endDate = "2017-09-05"
+        let endDate = "2017-09-12"
      
         self.dataFeed.historical(ticker: ticker, start: startDate, end: endDate ) { ( doneWork ) in
             if doneWork {
                 for thing in self.dataFeed.priceHistory {
                     print(thing.ticker! + " " + thing.date! +  " \(thing.close!)")
                 }
-                self.setUpChartUI()
+                
+                self.createDataSeries()
+                self.createRenderableSeries()
             }
         }
-        
+    }
+    
+    func setUpUI() {
+        // Create a SCIChartSurface. This is a UIView so can be added directly to the UI
         sciChartSurface = SCIChartSurface(frame: self.view.bounds)
         sciChartSurface?.translatesAutoresizingMaskIntoConstraints = true
         
+        // Add the SCIChartSurface as a subview
         self.view.addSubview(sciChartSurface!)
         
+        // Create an XAxis and YAxis. This step is mandatory before creating series
         sciChartSurface?.xAxes.add(SCINumericAxis())
         sciChartSurface?.yAxes.add(SCINumericAxis())
-        
-        createDataSeries()
-        createRenderableSeries()
-    }
-    
-    func setUpChartUI() {
-        
     }
     
     func createDataSeries(){
-        // Init line data series
-        lineDataSeries = SCIXyDataSeries(xType: .double, yType: .double)
-        for i in 0..<500{
-            lineDataSeries.appendX(SCIGeneric(i), y: SCIGeneric(sin(Double(i))*0.01))
-        }
         
-        // Init scatter data series
-        scatterDataSeries = SCIXyDataSeries(xType: .double, yType: .double)
-        for i in 0..<500{
-            scatterDataSeries.appendX(SCIGeneric(i), y: SCIGeneric(cos(Double(i))*0.01))
+        lineDataSeries = SCIXyDataSeries(xType: .dateTime, yType: .double)
+        
+        lineDataSeries.acceptUnsortedData = true
+     
+        let items = self.dataFeed.priceHistory
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        for i in 0..<(items.count) - 1 {
+            
+            let date:Date = dateFormatter.date(from: items[i].date!)!
+            print("\(date) \(items[i].close!)")
+            lineDataSeries.appendX(SCIGeneric(date), y: SCIGeneric(Double(items[i].close!)))
         }
     }
     
     func createRenderableSeries(){
         lineRenderableSeries = SCIFastLineRenderableSeries()
         lineRenderableSeries.dataSeries = lineDataSeries
-        
-        scatterRenderableSeries = SCIXyScatterRenderableSeries()
-        scatterRenderableSeries.dataSeries = scatterDataSeries
-        
         sciChartSurface?.renderableSeries.add(lineRenderableSeries)
-        sciChartSurface?.renderableSeries.add(scatterRenderableSeries)
+    }
+    
+    func stringToNSDate(theDate: String)-> NSDate {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"  // "LL/dd/yyyy" //
+        
+        return dateFormatter.date(from: theDate)! as NSDate //as NSDate
     }
     
 
 }
+
 
 
 

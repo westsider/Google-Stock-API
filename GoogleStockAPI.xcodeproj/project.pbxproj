@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D32C8741F64690300E13DE3 /* SCIGenericWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D32C8731F64690300E13DE3 /* SCIGenericWrapper.swift */; };
 		0D7B4CC71F56714700F6A088 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7B4CC61F56714700F6A088 /* ChartViewController.swift */; };
 		0D8F8CAE1F54730F007AE69F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */; };
 		0D8F8CB01F54730F007AE69F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F8CAF1F54730F007AE69F /* MainViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		0A3CF05DC6D9E1C1DE7860AC /* Pods_GoogleStockAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleStockAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D32C8731F64690300E13DE3 /* SCIGenericWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCIGenericWrapper.swift; sourceTree = "<group>"; };
 		0D7B4CC61F56714700F6A088 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		0D8F8CAA1F54730F007AE69F /* GoogleStockAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleStockAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -33,7 +35,6 @@
 		0D999E251F54BAF000EFB47F /* StockTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		0DCBEDDF1F5DFBA400C0993B /* DataFeedAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFeedAPI.swift; sourceTree = "<group>"; };
 		0DD06FDE1F6351F000020EE3 /* SciChart.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SciChart.framework; sourceTree = "<group>"; };
-		0DD06FE21F63526300020EE3 /* SCIGenericWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCIGenericWrapper.swift; sourceTree = "<group>"; };
 		82F9E46FB7CDFE2C837F436C /* Pods-GoogleStockAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleStockAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleStockAPI/Pods-GoogleStockAPI.debug.xcconfig"; sourceTree = "<group>"; };
 		CF528BB981941475431C9333 /* Pods-GoogleStockAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleStockAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-GoogleStockAPI/Pods-GoogleStockAPI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,7 +54,7 @@
 		0D8F8CA11F54730F007AE69F = {
 			isa = PBXGroup;
 			children = (
-				0DD06FE21F63526300020EE3 /* SCIGenericWrapper.swift */,
+				0D32C8731F64690300E13DE3 /* SCIGenericWrapper.swift */,
 				0DD06FDE1F6351F000020EE3 /* SciChart.framework */,
 				0D8F8CAC1F54730F007AE69F /* GoogleStockAPI */,
 				0D8F8CAB1F54730F007AE69F /* Products */,
@@ -228,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D32C8741F64690300E13DE3 /* SCIGenericWrapper.swift in Sources */,
 				0D8F8CB01F54730F007AE69F /* MainViewController.swift in Sources */,
 				0D8F8CC01F5475F0007AE69F /* GoogleClient.swift in Sources */,
 				0D999E261F54BAF000EFB47F /* StockTableViewCell.swift in Sources */,

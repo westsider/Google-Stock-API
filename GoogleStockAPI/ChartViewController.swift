@@ -10,9 +10,9 @@
 //  save it to object
 //  use completion handler to get the price history before creating chart
 //  use stock data in simple line chart
-
 //  add date from string
 //  reverse the days
+
 //  take ticker from main vc
 //  convert to make an OHLC
 

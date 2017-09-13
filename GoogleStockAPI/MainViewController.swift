@@ -37,6 +37,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     let marketData = MarketData()
     
+    let dataFeed = DataFeed()
+    
     @IBOutlet weak var tableview: UITableView!
 
     let realm = try! Realm()
@@ -51,7 +53,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
-
+        
+        dataFeed.getLastPrice(ticker: "AAPL")
     }
     
     override func viewWillAppear(_ animated: Bool) {

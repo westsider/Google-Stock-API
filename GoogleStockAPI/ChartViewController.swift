@@ -62,7 +62,7 @@ class ChartViewController: UIViewController {
         self.view.addSubview(sciChartSurface!)
         
         // Create an XAxis and YAxis. This step is mandatory before creating series
-        sciChartSurface?.xAxes.add(SCINumericAxis())
+        sciChartSurface?.xAxes.add(SCIDateTimeAxis())
         sciChartSurface?.yAxes.add(SCINumericAxis())
     }
     

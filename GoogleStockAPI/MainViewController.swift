@@ -54,7 +54,15 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
         
-        dataFeed.getLastPrice(ticker: "AAPL")
+        dataFeed.getLastPrice(ticker: "AAPL"){ ( doneWork ) in
+            if doneWork {
+                
+                let ticker = "AAPL"
+                for item in self.dataFeed.lastPrice {
+                    print("\(ticker) Date: \(String(describing: item.date!))  Close: \(String(describing: item.close!))")
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

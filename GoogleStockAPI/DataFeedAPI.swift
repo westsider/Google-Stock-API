@@ -73,12 +73,13 @@ class DataFeed {
         }
     }
     
-    func getLastPrice(ticker: String ) {
+    // Get realtime close + this also returns last 6 months
+    func getLastPrice(ticker: String, enterDoStuff: @escaping (Bool) -> Void ) {
         
         //MARK: - TODO: Completion Handeler
         //MARK: - TODO integrate into tableview
     
-        //enterDoStuff(false)
+        enterDoStuff(false)
         // get last price from intrio
         let prices = "https://api.intrinio.com/prices?identifier=\(ticker)"
         let user = "d7e969c0309ff3b9ced6ed36d75e6d0d"
@@ -97,7 +98,7 @@ class DataFeed {
                     let lastPriceObject = LastPrice()
                     
                     if let date = data["date"].string {
-                    lastPriceObject.date = date
+                        lastPriceObject.date = date
                     }
                     
                     if let open = data["open"].double {
@@ -118,11 +119,11 @@ class DataFeed {
                     self.lastPrice.append(lastPriceObject)
                     
                 }
-                for item in self.lastPrice {
-                   print("\(ticker) Date: \(String(describing: item.date!))  Close: \(String(describing: item.close!))")
-                }
+//                for item in self.lastPrice {
+//                   print("\(ticker) Date: \(String(describing: item.date!))  Close: \(String(describing: item.close!))")
+//                }
                 
-                //enterDoStuff(true)
+                enterDoStuff(true)
             
             case .failure(let error):
             debugPrint(error)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D2AAB661F69E3B200DC5F6E /* Realm Price Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2AAB651F69E3B200DC5F6E /* Realm Price Data.swift */; };
 		0D32C8741F64690300E13DE3 /* SCIGenericWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D32C8731F64690300E13DE3 /* SCIGenericWrapper.swift */; };
 		0D7B4CC71F56714700F6A088 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7B4CC61F56714700F6A088 /* ChartViewController.swift */; };
 		0D8F8CAE1F54730F007AE69F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		0A3CF05DC6D9E1C1DE7860AC /* Pods_GoogleStockAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleStockAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D2AAB651F69E3B200DC5F6E /* Realm Price Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Realm Price Data.swift"; sourceTree = "<group>"; };
 		0D32C8731F64690300E13DE3 /* SCIGenericWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCIGenericWrapper.swift; sourceTree = "<group>"; };
 		0D7B4CC61F56714700F6A088 /* ChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		0D8F8CAA1F54730F007AE69F /* GoogleStockAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleStockAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,12 +80,13 @@
 				0D8F8CAF1F54730F007AE69F /* MainViewController.swift */,
 				0D7B4CC61F56714700F6A088 /* ChartViewController.swift */,
 				0DCBEDDF1F5DFBA400C0993B /* DataFeedAPI.swift */,
-				0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */,
+				0D2AAB651F69E3B200DC5F6E /* Realm Price Data.swift */,
 				0D999E251F54BAF000EFB47F /* StockTableViewCell.swift */,
 				0D8F8CB41F54730F007AE69F /* Assets.xcassets */,
 				0D8F8CB61F54730F007AE69F /* LaunchScreen.storyboard */,
 				0D8F8CB91F54730F007AE69F /* Info.plist */,
 				0D8F8CAD1F54730F007AE69F /* AppDelegate.swift */,
+				0D8F8CBF1F5475F0007AE69F /* GoogleClient.swift */,
 			);
 			path = GoogleStockAPI;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				0D8F8CAE1F54730F007AE69F /* AppDelegate.swift in Sources */,
 				0DCBEDE01F5DFBA400C0993B /* DataFeedAPI.swift in Sources */,
 				0D7B4CC71F56714700F6A088 /* ChartViewController.swift in Sources */,
+				0D2AAB661F69E3B200DC5F6E /* Realm Price Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class PriceHistory {
     
@@ -18,7 +19,7 @@ class PriceHistory {
 }
 
 class LastPrice {
-    
+    var ticker: String?
     var date: String?
     var open: Double?
     var high: Double?
@@ -75,16 +76,15 @@ class DataFeed {
     
     // Get realtime close + this also returns last 6 months
     func getLastPrice(ticker: String, enterDoStuff: @escaping (Bool) -> Void ) {
-        
-        //MARK: - TODO: Completion Handeler
-        //MARK: - TODO integrate into tableview
     
+        print("looking for \(ticker)...")
         enterDoStuff(false)
         // get last price from intrio
         let prices = "https://api.intrinio.com/prices?identifier=\(ticker)"
         let user = "d7e969c0309ff3b9ced6ed36d75e6d0d"
         let password = "e6cf8f921bb621f398240e315ab79068"
     
+        
         Alamofire.request("\(prices)")
             .authenticate(user: user, password: password)
             .responseJSON { response in
@@ -93,9 +93,13 @@ class DataFeed {
                 let json = JSON(value)
                 //print("JSON: \(json)")
                 
-                for data in json["data"].arrayValue {
+                self.lastPrice.removeAll()
                 
+                for data in json["data"].arrayValue {
+                    
                     let lastPriceObject = LastPrice()
+                    
+                    lastPriceObject.ticker = ticker
                     
                     if let date = data["date"].string {
                         lastPriceObject.date = date
@@ -119,9 +123,10 @@ class DataFeed {
                     self.lastPrice.append(lastPriceObject)
                     
                 }
-//                for item in self.lastPrice {
-//                   print("\(ticker) Date: \(String(describing: item.date!))  Close: \(String(describing: item.close!))")
-//                }
+
+                let item = self.lastPrice.first
+                
+                RealmHelpers().saveToRealm(ticker: (item?.ticker)!, last: (item?.close)!, date: (item?.date)!)
                 
                 enterDoStuff(true)
             
@@ -129,6 +134,5 @@ class DataFeed {
             debugPrint(error)
             }
         }
-    
     }
 }

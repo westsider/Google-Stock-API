@@ -12,13 +12,6 @@ import SwiftyJSON
 import UIKit
 import RealmSwift
 
-class Prices: Object {
-    
-    dynamic var ticker = ""
-    dynamic var last = ""
-    dynamic var time = ""
-    dynamic var taskID = NSUUID().uuidString
-}
 
 class MarketData {
 
@@ -46,7 +39,7 @@ class MarketData {
                         let prices = Prices()
                         
                         prices.ticker = "\(ticker)"
-                        prices.last = "\(last)"
+                        prices.last = last.double!
                         prices.time = "\(time)"
                         
                         print("Begin Realm Save")

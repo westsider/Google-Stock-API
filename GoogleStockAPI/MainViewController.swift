@@ -5,29 +5,6 @@
 //  Created by Warren Hansen on 8/28/17.
 //  Copyright © 2017 Warren Hansen. All rights reserved.
 //
-/*
- Stock API Details
- This is a REST based API. Here is the basic syntax:
- http://finance.google.com/finance/info?client=ig&q=NASDAQ%3A[STOCK TICKERS]
- An example of this:
- http://finance.google.com/finance/info?client=ig&q=NASDAQ%3AAAPL,GOOG
- */
-//  make url request
-//  add symbol input
-//  find cool ui
-//  create ui to show results on tableview
-//  create ui to enter ticker
-//  persist in realm
-//  load tableview from realm
-//  delete rows in tableview
-//  didselectrow opens new VC
-
-//  just got access to tradeit api -  no price series func or structure seen
-
-//  add chart to new VC
-//  update with button and every 60 mins
-//  search NASDAQ and NYSE
-
 
 import UIKit
 import RealmSwift
@@ -52,22 +29,21 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //RealmHelpers().deleteAll()
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
         
-        dataFeed.getLastPrice(ticker: "AAPL"){ ( doneWork ) in
-            if doneWork {
-                
-                let ticker = "AAPL"
-                for item in self.dataFeed.lastPrice {
-                    print("\(ticker) Date: \(String(describing: item.date!))  Close: \(String(describing: item.close!))")
-                }
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.tableview.reloadData()
     }
+    
+    
+    @IBAction func clearRealm(_ sender: Any) {
+        RealmHelpers().deleteAll()
+    }
+    
     
     //TODO: - Subclass inside Google Client
     func addTapped() {
@@ -80,11 +56,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print("ticker is empty")
                 return
             }
-            print("Entered: \(String(describing: firstName))")
-            print("work not done")
-            self.marketData.getStockData(ticker: firstName) { ( doneWork ) in
+            let thisTicker = firstName.uppercased()
+            print("Entered: \(String(describing: thisTicker))")
+            print("Calling getLastPrice")
+
+            self.dataFeed.getLastPrice(ticker: thisTicker){ ( doneWork ) in
                 if doneWork {
-                    print("work done")
+                    print("Price data loaded")
                     self.tableview.reloadData()
                 }
             }
@@ -105,7 +83,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as!StockTableViewCell
         cell.tickerLabel?.text = priceList[indexPath.row].ticker
-        cell.priceLabel?.text = priceList[indexPath.row].last
+        cell.priceLabel?.text =  String(priceList[indexPath.row].last )
         return cell
     }
     

@@ -15,8 +15,11 @@
 //  take ticker from main vc
 //  cool icon
 //  convert to candle chart
-//  fix rollover
 //  add ticker error catches
+
+//  fix rollover
+//  bad ticker alert
+//  30 min chart
 
 
 import Foundation
@@ -37,6 +40,8 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = chartTicker
+        
         self.dataFeed.getLastPrice(ticker: chartTicker!, saveIt: false) { ( doneWork ) in
             if doneWork {
                 self.addSurface()
@@ -126,8 +131,8 @@ class ChartViewController: UIViewController {
         
         let pinchZoomModifier = SCIPinchZoomModifier()
         
-        //let rolloverModifier = SCIRolloverModifier()
-        //rolloverModifier.style.tooltipSize = CGSize(width: 200, height: CGFloat.nan)
+        let rolloverModifier = SCIRolloverModifier()
+        rolloverModifier.style.tooltipSize = CGSize(width: 200, height: CGFloat.nan)
 
         let groupModifier = SCIChartModifierCollection(childModifiers: [xAxisDragmodifier, yAxisDragmodifier, pinchZoomModifier, extendZoomModifier])  //rolloverModifier
         

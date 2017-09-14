@@ -13,8 +13,8 @@
 //  add date from string
 //  reverse the days
 //  take ticker from main vc
-
 //  cool icon
+
 //  convert to make an OHLC
 
 
@@ -29,11 +29,16 @@ class ChartViewController: UIViewController {
     
     var sciChartSurface: SCIChartSurface?
     
+    var chartTicker: String?
+    
+    // line chart
     var lineDataSeries: SCIXyDataSeries!
     
     var lineRenderableSeries: SCIFastLineRenderableSeries!
     
-    var chartTicker: String?
+    var ohlcDataSeries: SCIOhlcDataSeries!
+    
+    var ohlcRenderableSeries: SCIFastOhlcRenderableSeries!
     
     
     override func viewDidLoad() {
@@ -53,8 +58,8 @@ class ChartViewController: UIViewController {
                     print(thing.ticker! + " " + thing.date! +  " \(thing.close!)")
                 }
                 
-                self.createDataSeries()
-                self.createRenderableSeries()
+                self.createLineChart()
+                self.createRenderableSeriesLineChart()
             }
         }
     }
@@ -72,7 +77,8 @@ class ChartViewController: UIViewController {
         sciChartSurface?.yAxes.add(SCINumericAxis())
     }
     
-    func createDataSeries(){
+    //MARK: - Line Chart
+    func createLineChart(){
         
         lineDataSeries = SCIXyDataSeries(xType: .dateTime, yType: .double)
         
@@ -92,19 +98,39 @@ class ChartViewController: UIViewController {
         }
     }
     
-    func createRenderableSeries(){
+    func createRenderableSeriesLineChart(){
         lineRenderableSeries = SCIFastLineRenderableSeries()
         lineRenderableSeries.dataSeries = lineDataSeries
         sciChartSurface?.renderableSeries.add(lineRenderableSeries)
     }
     
-    func stringToNSDate(theDate: String)-> NSDate {
+    //MARK: - Bar Chart
+    func createBarChart(){
+        
+        ohlcDataSeries = SCIOhlcDataSeries(xType: .dateTime, yType: .double) //SCIXyDataSeries(xType: .dateTime, yType: .double)
+        
+        ohlcDataSeries.acceptUnsortedData = true
+        
+        let items = self.dataFeed.priceHistory
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"  // "LL/dd/yyyy" //
         
-        return dateFormatter.date(from: theDate)! as NSDate //as NSDate
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        for i in 0..<(items.count) - 1 {
+            
+            let date:Date = dateFormatter.date(from: items[i].date!)!
+            print("\(date) \(items[i].close!)")
+            //lineDataSeries.appendX(SCIGeneric(date), y: SCIGeneric(Double(items[i].close!)))
+            ohlcDataSeries.appendX(<#T##x: SCIGenericType##SCIGenericType#>, open: <#T##SCIGenericType#>, high: <#T##SCIGenericType#>, low: <#T##SCIGenericType#>, close: <#T##SCIGenericType#>)
+        }
     }
+    
+//    func createRenderableSeriesBarChart(){
+//        lineRenderableSeries = SCIFastLineRenderableSeries()
+//        lineRenderableSeries.dataSeries = lineDataSeries
+//        sciChartSurface?.renderableSeries.add(lineRenderableSeries)
+//    }
     
 
 }

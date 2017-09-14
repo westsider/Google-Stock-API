@@ -135,4 +135,12 @@ class DataFeed {
             }
         }
     }
+    
+    //    func stringToNSDate(theDate: String)-> NSDate {
+    //
+    //        let dateFormatter = DateFormatter()
+    //        dateFormatter.dateFormat = "yyyy-MM-dd"  // "LL/dd/yyyy" //
+    //
+    //        return dateFormatter.date(from: theDate)! as NSDate //as NSDate
+    //    }
 }

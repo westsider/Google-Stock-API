@@ -41,6 +41,7 @@ class ChartViewController: UIViewController {
             if doneWork {
                 self.addSurface()
                 self.addAxis()
+                self.addDefaultModifiers()
                 self.addDataSeries()
             }
         }
@@ -80,7 +81,7 @@ class ChartViewController: UIViewController {
                                            downWickPen: SCISolidPenStyle,
                                            count: Int) -> SCIFastCandlestickRenderableSeries {
 
-        let ohlcDataSeries = SCIOhlcDataSeries(xType: .dateTime, yType: .float)
+        let ohlcDataSeries = SCIOhlcDataSeries(xType: .dateTime, yType: .double)
         
         ohlcDataSeries.acceptUnsortedData = true
         
@@ -93,8 +94,8 @@ class ChartViewController: UIViewController {
         for i in 0..<(items.count) - 1 {
             
             let date:Date = dateFormatter.date(from: items[i].date!)!
-            //print("\(date) \(items[i].close!)")
-            ohlcDataSeries.appendX(SCIGeneric(date), open: SCIGeneric(Float(items[i].open!)), high: SCIGeneric(Float(items[i].high!)), low: SCIGeneric(Float(items[i].low!)), close: SCIGeneric(Float(items[i].close!)))
+            print("Date OHLC: \(date) \(items[i].open!) \(items[i].high!) \(items[i].low!) \(items[i].close!)")
+            ohlcDataSeries.appendX(SCIGeneric(date), open: SCIGeneric(Double(items[i].open!)), high: SCIGeneric(Double(items[i].high!)), low: SCIGeneric(Double(items[i].low!)), close: SCIGeneric(Double(items[i].close!)))
         }
         
         let candleRendereSeries = SCIFastCandlestickRenderableSeries()
@@ -105,6 +106,28 @@ class ChartViewController: UIViewController {
         candleRendereSeries.strokeDownStyle = downWickPen
         
         return candleRendereSeries
+    }
+    
+    func addDefaultModifiers() {
+        
+        let xAxisDragmodifier = SCIXAxisDragModifier()
+        
+        xAxisDragmodifier.dragMode = .scale
+        xAxisDragmodifier.clipModeX = .none
+        
+        let yAxisDragmodifier = SCIYAxisDragModifier()
+        yAxisDragmodifier.dragMode = .pan
+        
+        let extendZoomModifier = SCIZoomExtentsModifier()
+        
+        let pinchZoomModifier = SCIPinchZoomModifier()
+        
+        let rolloverModifier = SCIRolloverModifier()
+        rolloverModifier.style.tooltipSize = CGSize(width: 200, height: CGFloat.nan)
+        
+        let groupModifier = SCIChartModifierCollection(childModifiers: [xAxisDragmodifier, yAxisDragmodifier, pinchZoomModifier, extendZoomModifier, rolloverModifier])
+        
+        surface.chartModifiers = groupModifier
     }
 
 }

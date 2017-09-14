@@ -12,12 +12,8 @@ import Realm
 
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let marketData = MarketData()
-    
     let dataFeed = DataFeed()
     
-    @IBOutlet weak var tableview: UITableView!
-
     let realm = try! Realm()
 
     var priceList: Results<Prices> {
@@ -25,6 +21,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return realm.objects(Prices.self)
         }
     }
+    
+    @IBOutlet weak var tableview: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +30,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //RealmHelpers().deleteAll()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(addTapped))
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,8 +41,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         RealmHelpers().deleteAll()
     }
     
-    
-    //TODO: - Subclass inside Google Client
     func addTapped() {
         
         print("tapped add")
@@ -108,14 +103,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let myVC = storyboard?.instantiateViewController(withIdentifier: "ChartsVC") as! ChartViewController
         myVC.chartTicker = priceList[indexPath.row].ticker
         navigationController?.pushViewController(myVC, animated: true)
-        
-        /*
-         a better way to segue
-         let myVC = storyboard?.instantiateViewController(withIdentifier: "ChartsVC") as! ChartViewController
-         myVC.stringPassed = myLabel.text!
-         myVC.intPassed = myInt
-         navigationController?.pushViewController(myVC, animated: true)
-         */
     }
 }
 

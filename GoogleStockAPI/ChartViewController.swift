@@ -12,8 +12,9 @@
 //  use stock data in simple line chart
 //  add date from string
 //  reverse the days
-
 //  take ticker from main vc
+
+//  cool icon
 //  convert to make an OHLC
 
 
@@ -32,16 +33,21 @@ class ChartViewController: UIViewController {
     
     var lineRenderableSeries: SCIFastLineRenderableSeries!
     
+    var chartTicker: String?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("We passed in \(String(describing: chartTicker))")
 
         setUpUI()
         
-        let ticker = "$SPX"
-        let startDate = "2017-08-01"
+        //let ticker = "$SPX"
+        let startDate = "2017-06-01"
         let endDate = "2017-09-12"
      
-        self.dataFeed.historical(ticker: ticker, start: startDate, end: endDate ) { ( doneWork ) in
+        self.dataFeed.historical(ticker: chartTicker!, start: startDate, end: endDate ) { ( doneWork ) in
             if doneWork {
                 for thing in self.dataFeed.priceHistory {
                     print(thing.ticker! + " " + thing.date! +  " \(thing.close!)")

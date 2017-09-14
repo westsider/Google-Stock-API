@@ -106,8 +106,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let myVC = storyboard?.instantiateViewController(withIdentifier: "ChartsVC") as! ChartViewController
-    
+        myVC.chartTicker = priceList[indexPath.row].ticker
         navigationController?.pushViewController(myVC, animated: true)
+        
+        /*
+         a better way to segue
+         let myVC = storyboard?.instantiateViewController(withIdentifier: "ChartsVC") as! ChartViewController
+         myVC.stringPassed = myLabel.text!
+         myVC.intPassed = myInt
+         navigationController?.pushViewController(myVC, animated: true)
+         */
     }
 }
 

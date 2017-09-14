@@ -74,8 +74,8 @@ class DataFeed {
         }
     }
     
-    // Get realtime close + this also returns last 6 months
-    func getLastPrice(ticker: String, enterDoStuff: @escaping (Bool) -> Void ) {
+    // Get realtime ohlc + this also returns last 6 months
+    func getLastPrice(ticker: String, saveIt: Bool, enterDoStuff: @escaping (Bool) -> Void ) {
     
         print("looking for \(ticker)...")
         enterDoStuff(false)
@@ -126,7 +126,7 @@ class DataFeed {
 
                 let item = self.lastPrice.first
                 
-                RealmHelpers().saveToRealm(ticker: (item?.ticker)!, last: (item?.close)!, date: (item?.date)!)
+                if (saveIt) { RealmHelpers().saveToRealm(ticker: (item?.ticker)!, last: (item?.close)!, date: (item?.date)!) }
                 
                 enterDoStuff(true)
             

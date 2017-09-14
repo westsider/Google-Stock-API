@@ -55,7 +55,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             print("Entered: \(String(describing: thisTicker))")
             print("Calling getLastPrice")
 
-            self.dataFeed.getLastPrice(ticker: thisTicker){ ( doneWork ) in
+            self.dataFeed.getLastPrice(ticker: thisTicker, saveIt: true){ ( doneWork ) in
                 if doneWork {
                     print("Price data loaded")
                     self.tableview.reloadData()

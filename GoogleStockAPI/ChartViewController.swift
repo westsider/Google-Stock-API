@@ -14,11 +14,10 @@
 //  reverse the days
 //  take ticker from main vc
 //  cool icon
-
-//  convert to make an OHLC
-
+//  convert to candle chart
 
 
+import Foundation
 import UIKit
 import SciChart
 import Accelerate
@@ -27,111 +26,86 @@ class ChartViewController: UIViewController {
     
     let dataFeed = DataFeed()
     
-    var sciChartSurface: SCIChartSurface?
+    var surface = SCIChartSurface()
     
     var chartTicker: String?
-    
-    // line chart
-    var lineDataSeries: SCIXyDataSeries!
-    
-    var lineRenderableSeries: SCIFastLineRenderableSeries!
     
     var ohlcDataSeries: SCIOhlcDataSeries!
     
     var ohlcRenderableSeries: SCIFastOhlcRenderableSeries!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("We passed in \(String(describing: chartTicker))")
 
-        setUpUI()
-        
-        //let ticker = "$SPX"
-        let startDate = "2017-06-01"
-        let endDate = "2017-09-12"
-     
-        self.dataFeed.historical(ticker: chartTicker!, start: startDate, end: endDate ) { ( doneWork ) in
+        self.dataFeed.getLastPrice(ticker: chartTicker!, saveIt: false) { ( doneWork ) in
             if doneWork {
-                for thing in self.dataFeed.priceHistory {
-                    print(thing.ticker! + " " + thing.date! +  " \(thing.close!)")
-                }
-                
-                self.createLineChart()
-                self.createRenderableSeriesLineChart()
+                self.addSurface()
+                self.addAxis()
+                self.addDataSeries()
             }
         }
     }
     
-    func setUpUI() {
-        // Create a SCIChartSurface. This is a UIView so can be added directly to the UI
-        sciChartSurface = SCIChartSurface(frame: self.view.bounds)
-        sciChartSurface?.translatesAutoresizingMaskIntoConstraints = true
+    fileprivate func addSurface() {
+        surface = SCIChartSurface(frame: self.view.bounds)
+        surface.translatesAutoresizingMaskIntoConstraints = true
+        surface.frame = self.view.bounds
+        surface.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.view.addSubview(surface)
+    }
+
+    fileprivate func addAxis() {
+        let xAxis = SCIDateTimeAxis()
+        xAxis.growBy = SCIDoubleRange(min: SCIGeneric(0.1), max: SCIGeneric(0.1))
+        surface.xAxes.add(xAxis)
         
-        // Add the SCIChartSurface as a subview
-        self.view.addSubview(sciChartSurface!)
-        
-        // Create an XAxis and YAxis. This step is mandatory before creating series
-        sciChartSurface?.xAxes.add(SCIDateTimeAxis())
-        sciChartSurface?.yAxes.add(SCINumericAxis())
+        let yAxis = SCINumericAxis()
+        yAxis.growBy = SCIDoubleRange(min: SCIGeneric(0.1), max: SCIGeneric(0.1))
+        surface.yAxes.add(yAxis)
     }
     
-    //MARK: - Line Chart
-    func createLineChart(){
+    fileprivate func addDataSeries() {
+        let upBrush = SCISolidBrushStyle(colorCode: 0x9000AA00)
+        let downBrush = SCISolidBrushStyle(colorCode: 0x90FF0000)
+        let upWickPen = SCISolidPenStyle(colorCode: 0xFF00AA00, withThickness: 0.7)
+        let downWickPen = SCISolidPenStyle(colorCode: 0xFFFF0000, withThickness: 0.7)
         
-        lineDataSeries = SCIXyDataSeries(xType: .dateTime, yType: .double)
-        
-        lineDataSeries.acceptUnsortedData = true
-     
-        let items = self.dataFeed.priceHistory
-        
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        for i in 0..<(items.count) - 1 {
-            
-            let date:Date = dateFormatter.date(from: items[i].date!)!
-            print("\(date) \(items[i].close!)")
-            lineDataSeries.appendX(SCIGeneric(date), y: SCIGeneric(Double(items[i].close!)))
-        }
+        surface.renderableSeries.add(getCandleRenderSeries(false, upBodyBrush: upBrush, upWickPen: upWickPen, downBodyBrush: downBrush, downWickPen: downWickPen, count: 30))
     }
     
-    func createRenderableSeriesLineChart(){
-        lineRenderableSeries = SCIFastLineRenderableSeries()
-        lineRenderableSeries.dataSeries = lineDataSeries
-        sciChartSurface?.renderableSeries.add(lineRenderableSeries)
-    }
-    
-    //MARK: - Bar Chart
-    func createBarChart(){
-        
-        ohlcDataSeries = SCIOhlcDataSeries(xType: .dateTime, yType: .double) //SCIXyDataSeries(xType: .dateTime, yType: .double)
+    fileprivate func getCandleRenderSeries(_ isReverse: Bool,
+                                           upBodyBrush: SCISolidBrushStyle,
+                                           upWickPen: SCISolidPenStyle,
+                                           downBodyBrush: SCISolidBrushStyle,
+                                           downWickPen: SCISolidPenStyle,
+                                           count: Int) -> SCIFastCandlestickRenderableSeries {
+
+        let ohlcDataSeries = SCIOhlcDataSeries(xType: .dateTime, yType: .float)
         
         ohlcDataSeries.acceptUnsortedData = true
         
-        let items = self.dataFeed.priceHistory
+        let items = self.dataFeed.lastPrice
         
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        
+
         for i in 0..<(items.count) - 1 {
             
             let date:Date = dateFormatter.date(from: items[i].date!)!
-            print("\(date) \(items[i].close!)")
-            //lineDataSeries.appendX(SCIGeneric(date), y: SCIGeneric(Double(items[i].close!)))
-            ohlcDataSeries.appendX(<#T##x: SCIGenericType##SCIGenericType#>, open: <#T##SCIGenericType#>, high: <#T##SCIGenericType#>, low: <#T##SCIGenericType#>, close: <#T##SCIGenericType#>)
+            //print("\(date) \(items[i].close!)")
+            ohlcDataSeries.appendX(SCIGeneric(date), open: SCIGeneric(Float(items[i].open!)), high: SCIGeneric(Float(items[i].high!)), low: SCIGeneric(Float(items[i].low!)), close: SCIGeneric(Float(items[i].close!)))
         }
+        
+        let candleRendereSeries = SCIFastCandlestickRenderableSeries()
+        candleRendereSeries.dataSeries = ohlcDataSeries
+        candleRendereSeries.fillUpBrushStyle = upBodyBrush
+        candleRendereSeries.fillDownBrushStyle = downBodyBrush
+        candleRendereSeries.strokeUpStyle = upWickPen
+        candleRendereSeries.strokeDownStyle = downWickPen
+        
+        return candleRendereSeries
     }
-    
-//    func createRenderableSeriesBarChart(){
-//        lineRenderableSeries = SCIFastLineRenderableSeries()
-//        lineRenderableSeries.dataSeries = lineDataSeries
-//        sciChartSurface?.renderableSeries.add(lineRenderableSeries)
-//    }
-    
 
 }
 

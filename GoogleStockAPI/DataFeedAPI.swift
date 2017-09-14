@@ -125,8 +125,8 @@ class DataFeed {
                 }
 
                 let item = self.lastPrice.first
-                
-                if (saveIt) { RealmHelpers().saveToRealm(ticker: (item?.ticker)!, last: (item?.close)!, date: (item?.date)!) }
+                        //print("\nticker for realm: \(String(describing: item?.ticker))")
+                if (saveIt && item?.ticker != nil) { RealmHelpers().saveToRealm(ticker: (item?.ticker)!, last: (item?.close)!, date: (item?.date)!) }
                 
                 enterDoStuff(true)
             

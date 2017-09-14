@@ -15,6 +15,8 @@
 //  take ticker from main vc
 //  cool icon
 //  convert to candle chart
+//  fix rollover
+//  add ticker error catches
 
 
 import Foundation
@@ -92,7 +94,7 @@ class ChartViewController: UIViewController {
         for i in 0..<(items.count) - 1 {
             
             let date:Date = dateFormatter.date(from: items[i].date!)!
-            print("Date OHLC: \(date) \(items[i].open!) \(items[i].high!) \(items[i].low!) \(items[i].close!)")
+            ///print("Date OHLC: \(date) \(items[i].open!) \(items[i].high!) \(items[i].low!) \(items[i].close!)")
             ohlcDataSeries.appendX(SCIGeneric(date),
                                    open: SCIGeneric(items[i].open!),
                                    high: SCIGeneric(items[i].high!),

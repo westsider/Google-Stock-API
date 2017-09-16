@@ -16,10 +16,12 @@
 //  cool icon
 //  convert to candle chart
 //  add ticker error catches
+//  task: added trade entry line
 
-//  fix rollover
-//  bad ticker alert
 //  30 min chart
+//  convert date text to 01/05/2011, then convert to date, might help scrolling annotaions crash
+//  study annotations file  SCSAnnotationsView.swift
+//  study multipane file to create a line, all the answers are there
 
 
 import Foundation
@@ -48,6 +50,7 @@ class ChartViewController: UIViewController {
                 self.addAxis()
                 self.addDefaultModifiers()
                 self.addDataSeries()
+                self.addTradeEntry()
             }
         }
     }
@@ -95,6 +98,8 @@ class ChartViewController: UIViewController {
         let dateFormatter = DateFormatter()
         
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        print("array Size = \(items.count)")
 
         for i in 0..<(items.count) - 1 {
             
@@ -131,14 +136,48 @@ class ChartViewController: UIViewController {
         
         let pinchZoomModifier = SCIPinchZoomModifier()
         
+        //let rolloverModifier = SCIRolloverModifier()
+        //rolloverModifier.style.tooltipSize = CGSize(width: 200, height: CGFloat.nan)
+
+        let marker = SCIEllipsePointMarker()
+        marker.width = 20
+        marker.height = 20
+        marker.strokeStyle = SCISolidPenStyle(colorCode:0xFF390032,withThickness:0.5)
+        marker.fillStyle = SCISolidBrushStyle(colorCode:0xE1245120)
+        
         let rolloverModifier = SCIRolloverModifier()
         rolloverModifier.style.tooltipSize = CGSize(width: 200, height: CGFloat.nan)
-
-        let groupModifier = SCIChartModifierCollection(childModifiers: [xAxisDragmodifier, yAxisDragmodifier, pinchZoomModifier, extendZoomModifier])  //rolloverModifier
+        rolloverModifier.style.pointMarker = marker
+        
+        let groupModifier = SCIChartModifierCollection(childModifiers: [xAxisDragmodifier, yAxisDragmodifier, pinchZoomModifier, extendZoomModifier, rolloverModifier])  //rolloverModifier
         
         surface.chartModifiers = groupModifier
     }
+    
+    func addTradeEntry() {
+        
+        let annotationGroup = SCIAnnotationCollection()
 
+        let horizontalLine1 = SCIHorizontalLineAnnotation()
+        horizontalLine1.coordinateMode = .absolute;
+        horizontalLine1.y1 = SCIGeneric(248);
+        horizontalLine1.horizontalAlignment = .stretch
+        horizontalLine1.add(self.buildLineTextLabel("Sell @ 248", alignment: .axis, backColor: UIColor.red, textColor: UIColor.white))
+        horizontalLine1.style.linePen = SCISolidPenStyle.init(color: UIColor.red, withThickness:2)
+        annotationGroup.add(horizontalLine1)
+        
+        surface.annotations = annotationGroup
+
+    }
+
+    private func buildLineTextLabel(_ text: String, alignment: SCILabelPlacement, backColor: UIColor, textColor: UIColor) -> SCILineAnnotationLabel {
+        let lineText = SCILineAnnotationLabel()
+        lineText.text = text
+        lineText.style.labelPlacement = alignment
+        lineText.style.backgroundColor = backColor
+        lineText.style.textStyle.color = textColor
+        return lineText
+    }
 }
 
 

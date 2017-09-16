@@ -66,6 +66,10 @@ class DataFeed {
                         self.priceHistory.append(priceObject)
             
                     }
+                    // sort array in date
+                    
+                    //var ordered = priceHistory.sorted(by: <#T##(PriceHistory, PriceHistory) -> Bool#>)
+                    
                     enterDoStuff(true)
                     
                 case .failure(let error):

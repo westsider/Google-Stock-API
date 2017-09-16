@@ -17,9 +17,12 @@
 //  convert to candle chart
 //  add ticker error catches
 //  task: added trade entry line
+//  task: convert date text to 01/05/2011, then convert to date, might help scrolling annotaions crash
+//  task: reversed index of prices object to stop unsorded data crash
 
+//  put reverse logic insinf data api call
+//  clean up style
 //  30 min chart
-//  convert date text to 01/05/2011, then convert to date, might help scrolling annotaions crash
 //  study annotations file  SCSAnnotationsView.swift
 //  study multipane file to create a line, all the answers are there
 
@@ -95,22 +98,58 @@ class ChartViewController: UIViewController {
         
         let items = self.dataFeed.lastPrice
         
+        debugPrint(items)
+        
+        for thing in items {
+            
+            print(thing.date!)
+        }
+        
+        let reversed = items.reversed() // [LastPrice]()
+        
+        debugPrint(reversed)
+      
+        
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy/MM/dd"
         
         print("array Size = \(items.count)")
 
-        for i in 0..<(items.count) - 1 {
+          for things in reversed {
             
-            let date:Date = dateFormatter.date(from: items[i].date!)!
+            let dashDate = things.date!
+            let slashDate = dashDate.replacingOccurrences(of: "-", with: "/")
+            
+            let date:Date = dateFormatter.date(from: slashDate)!
+            
+            print("shash: \(slashDate) NSDate: \(date)")
+            
             ///print("Date OHLC: \(date) \(items[i].open!) \(items[i].high!) \(items[i].low!) \(items[i].close!)")
             ohlcDataSeries.appendX(SCIGeneric(date),
-                                   open: SCIGeneric(items[i].open!),
-                                   high: SCIGeneric(items[i].high!),
-                                   low: SCIGeneric(items[i].low!),
-                                   close: SCIGeneric(items[i].close!))
+                                   open: SCIGeneric(things.open!),
+                                   high: SCIGeneric(things.high!),
+                                   low: SCIGeneric(things.low!),
+                                   close: SCIGeneric(things.close!))
         }
+        
+        
+//        for i in 0..<(items.count) - 1 {
+//            
+//            let dashDate = items[i].date!
+//            let slashDate = dashDate.replacingOccurrences(of: "-", with: "/")
+//            
+//            let date:Date = dateFormatter.date(from: slashDate)!
+//            
+//            print("shash: \(slashDate) NSDate: \(date)")
+//            
+//            ///print("Date OHLC: \(date) \(items[i].open!) \(items[i].high!) \(items[i].low!) \(items[i].close!)")
+//            ohlcDataSeries.appendX(SCIGeneric(date),
+//                                   open: SCIGeneric(items[i].open!),
+//                                   high: SCIGeneric(items[i].high!),
+//                                   low: SCIGeneric(items[i].low!),
+//                                   close: SCIGeneric(items[i].close!))
+//        }
         
         let candleRendereSeries = SCIFastCandlestickRenderableSeries()
         candleRendereSeries.dataSeries = ohlcDataSeries

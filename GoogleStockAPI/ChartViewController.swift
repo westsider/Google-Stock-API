@@ -19,9 +19,8 @@
 //  task: added trade entry line
 //  task: convert date text to 01/05/2011, then convert to date, might help scrolling annotaions crash
 //  task: reversed index of prices object to stop unsorded data crash
+//  style: clean up functions
 
-//  put reverse logic insinf data api call
-//  clean up style
 //  30 min chart
 //  study annotations file  SCSAnnotationsView.swift
 //  study multipane file to create a line, all the answers are there
@@ -97,18 +96,8 @@ class ChartViewController: UIViewController {
         ohlcDataSeries.acceptUnsortedData = true
         
         let items = self.dataFeed.lastPrice
-        
-        debugPrint(items)
-        
-        for thing in items {
-            
-            print(thing.date!)
-        }
-        
-        let reversed = items.reversed() // [LastPrice]()
-        
-        debugPrint(reversed)
-      
+
+        let reversed = items.reversed() 
         
         let dateFormatter = DateFormatter()
         
@@ -132,24 +121,6 @@ class ChartViewController: UIViewController {
                                    low: SCIGeneric(things.low!),
                                    close: SCIGeneric(things.close!))
         }
-        
-        
-//        for i in 0..<(items.count) - 1 {
-//            
-//            let dashDate = items[i].date!
-//            let slashDate = dashDate.replacingOccurrences(of: "-", with: "/")
-//            
-//            let date:Date = dateFormatter.date(from: slashDate)!
-//            
-//            print("shash: \(slashDate) NSDate: \(date)")
-//            
-//            ///print("Date OHLC: \(date) \(items[i].open!) \(items[i].high!) \(items[i].low!) \(items[i].close!)")
-//            ohlcDataSeries.appendX(SCIGeneric(date),
-//                                   open: SCIGeneric(items[i].open!),
-//                                   high: SCIGeneric(items[i].high!),
-//                                   low: SCIGeneric(items[i].low!),
-//                                   close: SCIGeneric(items[i].close!))
-//        }
         
         let candleRendereSeries = SCIFastCandlestickRenderableSeries()
         candleRendereSeries.dataSeries = ohlcDataSeries
@@ -175,24 +146,22 @@ class ChartViewController: UIViewController {
         
         let pinchZoomModifier = SCIPinchZoomModifier()
         
-        //let rolloverModifier = SCIRolloverModifier()
-        //rolloverModifier.style.tooltipSize = CGSize(width: 200, height: CGFloat.nan)
-
+        let rolloverModifier = SCIRolloverModifier()
+        rolloverModifier.style.tooltipSize = CGSize(width: 200, height: CGFloat.nan)
+        
         let marker = SCIEllipsePointMarker()
         marker.width = 20
         marker.height = 20
-        marker.strokeStyle = SCISolidPenStyle(colorCode:0xFF390032,withThickness:0.5)
+        marker.strokeStyle = SCISolidPenStyle(colorCode:0xFF390032,withThickness:0.25)
         marker.fillStyle = SCISolidBrushStyle(colorCode:0xE1245120)
-        
-        let rolloverModifier = SCIRolloverModifier()
-        rolloverModifier.style.tooltipSize = CGSize(width: 200, height: CGFloat.nan)
         rolloverModifier.style.pointMarker = marker
         
-        let groupModifier = SCIChartModifierCollection(childModifiers: [xAxisDragmodifier, yAxisDragmodifier, pinchZoomModifier, extendZoomModifier, rolloverModifier])  //rolloverModifier
+        let groupModifier = SCIChartModifierCollection(childModifiers: [xAxisDragmodifier, yAxisDragmodifier, pinchZoomModifier, extendZoomModifier, rolloverModifier])
         
         surface.chartModifiers = groupModifier
     }
     
+    //MARK: - Trade entry margin line
     func addTradeEntry() {
         
         let annotationGroup = SCIAnnotationCollection()
